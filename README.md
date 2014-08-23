@@ -1,0 +1,4 @@
+mwrestuser
+==========
+
+REST user resource
