@@ -10,3 +10,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.name
+.idea/artifacts/mwrestuser_war.xml
+.idea/artifacts/mwrestuser_war_exploded.xml
+.idea/compiler.xml
+.idea
+target
+*.iml

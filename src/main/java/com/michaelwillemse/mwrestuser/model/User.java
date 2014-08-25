@@ -54,6 +54,7 @@ public class User {
         this.email = email;
     }
 
+    //REST service does not show password (TODO: DTO for User clas)
     public String getPassword() {
         return "";
     }
