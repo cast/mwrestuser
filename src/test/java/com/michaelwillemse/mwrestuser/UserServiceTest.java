@@ -26,7 +26,7 @@ import java.io.File;
 @RunWith(Arquillian.class)
 public class UserServiceTest {
     @Inject
-    private UserDao userService;
+    private UserDao userDao;
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -47,18 +47,18 @@ public class UserServiceTest {
     @Test
     public void createDeleteTest(){
         User user = new User("tom", "tom@gmail.com", "passwd");
-        userService.create(user);
+        userDao.create(user);
         Assert.assertNotNull(user.getId());
-        userService.delete(user.getId());
-        Assert.assertNull(userService.getUserById(user.getId()));
+        userDao.delete(user.getId());
+        Assert.assertNull(userDao.getUserById(user.getId()));
     }
 
     @Test(expected = EJBException.class)
     public void testUniqueness(){
         User user = new User("test1", "test@gmail.com", "passwd");
-        userService.create(user);
+        userDao.create(user);
         User user2 = new User("test2", "test@gmail.com", "passwd2");
-        userService.create(user2);
+        userDao.create(user2);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class UserServiceTest {
     @Test
     public void checkpasswordTest() {
         User user = new User("michael", "michael@gmail.com", "passwd");
-        user = userService.create(user);
-        Assert.assertTrue(userService.passwordCheck("michael@gmail.com", "passwd"));
+        user = userDao.create(user);
+        Assert.assertTrue(userDao.passwordCheck("michael@gmail.com", "passwd"));
     }
 }

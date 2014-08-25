@@ -5,7 +5,6 @@ import com.michaelwillemse.mwrestuser.persistence.UserDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -52,7 +51,6 @@ public class UserRestService {
     /*Only one GET per endpoint, different query params still cause errors because of ambiguity. Promotes RPC design */
     @GET
     public List<User> findByNameOrEmail(@QueryParam("name") String name,@QueryParam("email") String email){
-        TypedQuery<User> query;
         if(email != null && name != null){
             return userService.findUsersByNameAndEmail(name, email);
         }else if(email != null){
