@@ -2,6 +2,7 @@ package com.michaelwillemse.mwrestuser;
 
 import com.michaelwillemse.mwrestuser.model.User;
 import com.michaelwillemse.mwrestuser.persistence.UserDao;
+import com.michaelwillemse.mwrestuser.rest.Result;
 import com.michaelwillemse.mwrestuser.rest.UserApplication;
 import com.michaelwillemse.mwrestuser.rest.UserRestService;
 import com.michaelwillemse.mwrestuser.utils.MD5Hash;
@@ -39,6 +40,7 @@ public class UserServiceTest {
                 .addClass(UserApplication.class)
                 .addClass(UserRestService.class)
                 .addClass(MD5Hash.class)
+                .addClass(Result.class)
                 .addAsLibraries(lib)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));

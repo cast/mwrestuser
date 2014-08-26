@@ -3,7 +3,7 @@ package com.michaelwillemse.mwrestuser.rest;
 import com.michaelwillemse.mwrestuser.model.User;
 import com.michaelwillemse.mwrestuser.persistence.UserDao;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Path("/users")
-@Stateless
+@RequestScoped
 public class UserRestService {
     @Inject
     UserDao userService;
@@ -43,9 +43,9 @@ public class UserRestService {
 
     @DELETE
     @Path("{id}")
-    public String delete(@PathParam("id") long id){
+    public Result delete(@PathParam("id") long id){
         userService.delete(id);
-        return "ok";
+        return new Result("ok");
     }
 
     /*Only one GET per endpoint, different query params still cause errors because of ambiguity. Promotes RPC design */
@@ -64,8 +64,9 @@ public class UserRestService {
 
     @Path("/pwdcheck")
     @GET
-    public Boolean passwordCheck(@QueryParam("email") String email,@QueryParam("pwd") String password){
-        return userService.passwordCheck(email, password);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Result passwordCheck(@QueryParam("email") String email,@QueryParam("pwd") String password){
+        return new Result(userService.passwordCheck(email, password).toString());
     }
 
 }
